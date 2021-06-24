@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -6,182 +6,196 @@ export const App = () => {
   
   const [formData, setFormData] =
     useState({
-      "required": 0,
-      "12": 0,
-      "11-1/2": 0,
-      "11": 0,
-      "10-1/2": 0,
-      "10": 0,
-      "9-1/2": 0,
-      "9": 0,
-      "8-1/2": 0,
-      "8": 0,
-      "7-1/2": 0,
-      "7": 0,
-      "6-1/2": 0,
-      "6": 0,
-      "5-1/2": 0,
-      "5": 0,
-      "4-1/2": 0,
-      "4": 0,
-      "3-1/2": 0,
-      "3": 0,
-      "2-1/2": 0,
-      "2": 0
+      12: 0,
+      11.5: 0,
+      11: 0,
+      10.5: 0,
+      10: 0,
+      9.5: 0,
+      9: 0,
+      8.5: 0,
+      8: 0,
+      7.5: 0,
+      7: 0,
+      6.5: 0,
+      6: 0,
+      5.5: 0,
+      5: 0,
+      4.5: 0,
+      4: 0,
+      3.5: 0,
+      3: 0,
+      2.5: 0,
+      2: 0
     });
+  const [widthOption, setWidthOption] = useState(4);
+  const [total, setTotal] = useState(0);
 
-    const handleCounterChange = (event, property) => {
-      console.log(property)
-      event.target.name === "sub"
-        ? setFormData({
-            ...formData,
-            [property]: formData[property] - 1
-          })
-        : setFormData({
-            ...formData,
-            [property]: formData[property] + 1
-          });
-    }
+  useEffect(() => {
+    calculateTotal();
+  }, [formData]);
+
+  const handleCounterChange = (event, length) => {
+    formData[length]
+      ? setFormData({
+          ...formData,
+          [length]: event.target.name === "sub" ? formData[length] - 1 : formData[length] + 1
+        })
+      : setFormData({
+          ...formData,
+          [length]: event.target.name === "sub" ? formData[length] : formData[length] + 1
+        });
+
+      calculateTotal();
+  }
+
+  const calculateTotal = () => {
+    let result = 0;
+    Object.keys(formData).forEach(length => {
+      result = result + (length * formData[length]);
+    });
+    setTotal(result);
+  }
+
+  const widthOptions = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+  const sortedFormData = Object.keys(formData).sort((a, b) => b - a);
 
   return (
     <Container>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "12")}>-</Button>
-        <CounterDisplay>{formData["12"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "12")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "11-1/2")}>-</Button>
-        <CounterDisplay>{formData["11-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "11-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "11")}>-</Button>
-        <CounterDisplay>{formData["11"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "11")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "10-1/2")}>-</Button>
-        <CounterDisplay>{formData["10-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "10-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "10")}>-</Button>
-        <CounterDisplay>{formData["10"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "10")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "9-1/2")}>-</Button>
-        <CounterDisplay>{formData["9-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "9-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "9")}>-</Button>
-        <CounterDisplay>{formData["9"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "9")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "8-1/2")}>-</Button>
-        <CounterDisplay>{formData["8-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "8-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "8")}>-</Button>
-        <CounterDisplay>{formData["8"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "8")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "7-1/2")}>-</Button>
-        <CounterDisplay>{formData["7-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "7-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "7")}>-</Button>
-        <CounterDisplay>{formData["7"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "7")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "6-1/2")}>-</Button>
-        <CounterDisplay>{formData["6-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "6-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "6")}>-</Button>
-        <CounterDisplay>{formData["6"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "6")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "5-1/2")}>-</Button>
-        <CounterDisplay>{formData["5-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "5-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "5")}>-</Button>
-        <CounterDisplay>{formData["5"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "5")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "4-1/2")}>-</Button>
-        <CounterDisplay>{formData["4-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "4-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "4")}>-</Button>
-        <CounterDisplay>{formData["4"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "4")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "3-1/2")}>-</Button>
-        <CounterDisplay>{formData["3-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "3-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "3")}>-</Button>
-        <CounterDisplay>{formData["3"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "3")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "2-1/2")}>-</Button>
-        <CounterDisplay>{formData["2-1/2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "2-1/2")}>+</Button>
-      </CounterItem>
-      <CounterItem>
-        <Button name="sub" onClick={event => handleCounterChange(event, "2")}>-</Button>
-        <CounterDisplay>{formData["2"]}</CounterDisplay>
-        <Button name="add" onClick={event => handleCounterChange(event, "2")}>+</Button>
-      </CounterItem>
+      <Header>
+        <Heading>{total} LF</Heading>
+        <Heading>{Math.round((widthOption / 12) * total)} SQ FT</Heading>
+      </Header>
+      <LengthOptions>
+        {widthOptions.map((width, index) => {
+          if (index === 0) {
+            return (
+              <LeftOption active={widthOption === width} key={index} onClick={() => setWidthOption(width)}>
+                {width}"
+              </LeftOption>
+            )
+          }
+
+          if (index === widthOptions.length - 1) {
+            return (
+              <RightOption active={widthOption === width} key={index} onClick={() => setWidthOption(width)}>
+                {width}"
+              </RightOption>
+            )
+          }
+
+          return (
+            <MiddleOption active={widthOption === width} key={index} onClick={() => setWidthOption(width)}>
+              {width}"
+            </MiddleOption>
+          )
+        })}
+      </LengthOptions>
+      <CounterItemContainer>
+        {sortedFormData.map((length, index) => {
+          return (
+            <CounterItem key={index}>
+              <Button wide name="add" onClick={event => handleCounterChange(event, length)}>{length.includes(".5") ? `${Math.floor(length)}½` : length}'</Button>
+              <CounterDisplay>{formData[length]}</CounterDisplay>
+              <Button sub name="sub" onClick={event => handleCounterChange(event, length)}>{length.includes(".5") ? `${Math.floor(length)}½` : length}'</Button>
+            </CounterItem>
+          )}
+        )}
+      </CounterItemContainer>
     </Container>
   );
 }
 
 const Container = styled.div(props => ({
   display: 'flex',
+  flexDirection: 'column',
+  width: '1625px',
+  height: '100vh'
+}));
+
+const Header = styled.div(props => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+  padding: '2rem 0'
+}));
+
+const Heading = styled.span(props => ({
+  fontSize: '4.5rem'
+}));
+
+const LengthOptions = styled.div(props => ({
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+  paddingBottom: '2rem'
+}));
+
+const LeftOption = styled.button(props => ({
+  backgroundColor: props.active ? 'white' : 'rgba(50, 54, 59, 1.0)',
+  color: props.active ? 'black' : '#fff',
+  fontSize: '1.5rem',
+  border: 'none',
+  borderRadius: '20px 0px 0px 20px',
+  width: '125px',
+  height: '70px'
+}));
+
+const MiddleOption = styled.button(props => ({
+  backgroundColor: props.active ? 'white' : 'rgba(50, 54, 59, 1.0)',
+  color: props.active ? 'black' : '#fff',
+  fontSize: '1.5rem',
+  border: 'none',
+  width: '125px',
+  height: '70px'
+}));
+
+const RightOption = styled.button(props => ({
+  backgroundColor: props.active ? 'white' : 'rgba(50, 54, 59, 1.0)',
+  color: props.active ? 'black' : '#fff',
+  fontSize: '1.5rem',
+  border: 'none',
+  borderRadius: '0px 20px 20px 0px',
+  width: '125px',
+  height: '70px'
+}));
+
+const CounterItemContainer = styled.div(props => ({
+  display: 'flex',
   flexFlow: 'row wrap',
   justifyContent: 'space-between',
   alignItems: 'center',
-  width: '50vw',
-  height: '100vh'
+  width: '100%',
+  height: '100%'
 }));
 
 const CounterItem = styled.div(props => ({
   display: 'flex',
-  justifyContent: props.right && 'flex-end',
-  padding: '1rem'
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '30%',
+  height: '100px'
 }));
 
 const CounterDisplay = styled.div(props => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  fontSize: '3rem',
-  width: '125px',
+  backgroundColor: 'rgba(50, 54, 59, 1.0)',
+  fontSize: '2rem',
+  fontWeight: 'bold',
+  width: '100px',
   height: '70px'
 }));
 
 const Button = styled.button(props => ({
-  fontSize: '3rem',
+  backgroundColor: props.sub ? 'rgba(147, 39, 39, 0.9)' : 'rgba(54, 115, 54, 0.9)',
+  color: '#fff',
+  fontSize: '2rem',
   border: 'none',
-  borderRadius: '10px',
-  width: '70px',
+  borderRadius: props.sub ? '0px 10px 10px 0px' : '10px 0px 0px 10px',
+  width: '100px',
   height: '70px'
 }));
