@@ -229,7 +229,7 @@ const Button = styled.button((props) => ({
     ? "rgba(147, 39, 39, 0.9)"
     : "rgba(54, 115, 54, 0.9)",
   color: "#fff",
-  fontSize: "min(3vw, 1.5rem)",
+  fontSize: "min(3vw, 2rem)",
   border: "none",
   borderRadius: props.sub ? "0px 10px 10px 0px" : "10px 0px 0px 10px",
   width: "min(8vw, 100px)",
