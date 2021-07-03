@@ -134,8 +134,9 @@ export const App = () => {
 const Container = styled.div((props) => ({
   display: "flex",
   flexDirection: "column",
-  width: "1625px",
+  minWidth: "600px",
   height: "100vh",
+  padding: '1rem'
 }));
 
 const Header = styled.div((props) => ({
@@ -143,49 +144,49 @@ const Header = styled.div((props) => ({
   justifyContent: "space-between",
   alignItems: "center",
   width: "100%",
-  padding: "2rem 0",
+  paddingBottom: '1rem'
 }));
 
 const Heading = styled.span((props) => ({
-  fontSize: "3rem",
+  fontSize: "min(5vw, 3rem)",
 }));
 
 const LengthOptions = styled.div((props) => ({
   display: "flex",
   justifyContent: "center",
   width: "100%",
-  paddingBottom: "2rem",
+  paddingBottom: "1rem",
 }));
 
 const LeftOption = styled.button((props) => ({
   backgroundColor: props.active ? "white" : "rgba(50, 54, 59, 1.0)",
   color: props.active ? "black" : "#fff",
-  fontSize: "1.5rem",
+  fontSize: "min(3vw, 1.3rem)",
   border: "none",
   borderRadius: "20px 0px 0px 20px",
-  width: "125px",
-  height: "70px",
+  width: `${100 / 13}%`,
+  height: "8vh",
   cursor: "pointer",
 }));
 
 const MiddleOption = styled.button((props) => ({
   backgroundColor: props.active ? "white" : "rgba(50, 54, 59, 1.0)",
   color: props.active ? "black" : "#fff",
-  fontSize: "1.5rem",
+  fontSize: "min(3vw, 1.3rem)",
   border: "none",
-  width: "125px",
-  height: "70px",
+  width: `${100 / 13}%`,
+  height: "8vh",
   cursor: "pointer",
 }));
 
 const RightOption = styled.button((props) => ({
   backgroundColor: props.active ? "white" : "rgba(50, 54, 59, 1.0)",
   color: props.active ? "black" : "#fff",
-  fontSize: "1.5rem",
+  fontSize: "min(3vw, 1.3rem)",
   border: "none",
   borderRadius: "0px 20px 20px 0px",
-  width: "125px",
-  height: "70px",
+  width: `${100 / 13}%`,
+  height: "8vh",
   cursor: "pointer",
 }));
 
@@ -202,8 +203,8 @@ const CounterItem = styled.div((props) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "30%",
-  height: "100px",
+  width: `${100 / 3}%`,
+  height: "min(30px, 12vh)",
 }));
 
 const CounterDisplay = styled.input((props) => ({
@@ -212,10 +213,10 @@ const CounterDisplay = styled.input((props) => ({
   appearance: 'none',
   backgroundColor: "rgba(50, 54, 59, 1.0)",
   color: "#ffffff",
-  fontSize: '2.5rem',
+  fontSize: 'min(3vw, 2rem)',
   textAlign: 'center',
-  width: "100px",
-  height: "70px",
+  width: "min(12vw, 100px)",
+  height: "8vh",
   border: 'none',
   padding: '1rem',
   '&:focus': {
@@ -228,10 +229,10 @@ const Button = styled.button((props) => ({
     ? "rgba(147, 39, 39, 0.9)"
     : "rgba(54, 115, 54, 0.9)",
   color: "#fff",
-  fontSize: "2rem",
+  fontSize: "min(3vw, 1.5rem)",
   border: "none",
   borderRadius: props.sub ? "0px 10px 10px 0px" : "10px 0px 0px 10px",
-  width: "100px",
-  height: "70px",
+  width: "min(8vw, 100px)",
+  height: "8vh",
   cursor: "pointer",
 }));
